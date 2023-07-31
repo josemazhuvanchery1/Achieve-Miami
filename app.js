@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 let cors = require('cors');
@@ -123,7 +124,7 @@ app.post('/webhooks', (req, res) => {
   console.log(ansObj)
   const myHeaders = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer pat-na1-5baf5e58-b545-4f46-976e-e8bd5c444250"
+    "Authorization": process.env.api-key
   };
   const participantBody = JSON.stringify({
     "properties": {
