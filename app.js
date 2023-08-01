@@ -5,7 +5,7 @@ let cors = require('cors');
 const http = require('http');
 const fetch = require('isomorphic-fetch');
 //Port
-const PORT = 8000; /*process.env.PORT ||*/
+const PORT = 3000; /*process.env.PORT ||*/
 
 //middleware
 app.use(cors());
@@ -23,11 +23,12 @@ app.post('/webhooks', (req, res) => {
     "I5VP2PpEkkYk": "current_grade",
     "wZjAgdzVwpIj": "child_school",
     "OOQW2JUwDLXf": "reporting_program",
-    //"lZhzWd0JdJoq": "school_site", // "Which Achieve Summer location would you like to register your child for?"
+    // "Which Achieve Summer location would you like to register your child for?"
+    "lZhzWd0JdJoq": "school_site", 
     "iBFkmqWpgmln": 'gender',
     "ZPQhNsroAsge": 'race',
     "AL7HaTdJtZAl": "native_language",
-    "X04ltFaZrtii": "adress",
+    "X04ltFaZrtii": "address",
     "zcXXBy0cRR6J": "city",
     "wl8vcQPtd7jV": "state",
     "km6GBsWJgHTu": "zip",
@@ -142,12 +143,17 @@ app.post('/webhooks', (req, res) => {
       "studentschoolemail": ansObj.student_email,//student email should is required
       "languages_spoken": ansObj.native_language,
       "student_id_number": ansObj.student_id,
-      "street_address": ansObj.adress,
+      "street_address": ansObj.address,
       "race_ethnicity": ansObj.race,//have to modify this hubspot internal names
       "type": "student",
       "school_year":"2023-2024",
-      "zip_code": ansObj.zip
-      // consent not added
+      "zip_code": ansObj.zip,
+      // consent prop
+      "school_site": ansObj.school_site,
+      "consent_covid": ansObj.consent_covid,
+      "consent_media": ansObj.consent_media,
+      "consent_program_participation": ansObj.consent_program_parcipation,
+      "disclosure_form": ansObj.disclosure_form
     }
   });
 
@@ -177,7 +183,7 @@ app.post('/webhooks', (req, res) => {
     "properties": {
       "firstname": ansObj.parent_firstName,
       "lastname": ansObj.parent_lastName,
-      "address": ansObj.adress,
+      "address": ansObj.address,
       "city": ansObj.city,
       "email": ansObj.parent_email,
       "phone": ansObj.parent_phone,
